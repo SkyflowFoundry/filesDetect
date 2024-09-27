@@ -1,8 +1,8 @@
 {
-  "AccountId": "l462cc76228247b38f79c439d67d20ec",
-  "Vault_URL": "https://ebfc9bee4242.vault.skyflowapis.com",
-  "Vault_ID": "ud46d36edbe244c999694cd869d8b4ea",
-  "Common_Files_Directory": "/Users/priyantadharmasena/Documents/Python/commonFiles",
+  "AccountId": "your-skyflow-accountId-from-studio",
+  "Vault_URL": "your-skyflow-vault-url",
+  "Vault_ID": "your-skyflow-vault-id",
+  "Common_Files_Directory": "path-to-the-common_files-diretcory-extracted-from-the-repo",
   "Data_Types": [
     "mp3",
     "wav",
