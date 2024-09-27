@@ -48,7 +48,7 @@ def getFileSetEnv(params):            #setup environment and get Jwt
 
     if file_type not in DATA_TYPES:       #not picking a supported data file
         print(f"ERROR: File type {file_type} not currently supported")
-        print("Supported files are: mp3, wav, pdf, txt, csv, json, jpg, jpeg, tif, tiff, png, bmp")
+        print("Supported files are: mp3, wav, pdf, txt, json, jpg, jpeg, tif, tiff, png, bmp")
         exit(1)
     else:                           #set payload api-options for file_type
         if file_type in params['ImageFiles']:
