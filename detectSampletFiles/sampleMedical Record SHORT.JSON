@@ -1,0 +1,204 @@
+{
+  "PatientInformation": {
+    "Name": "Rogers, Pamela",
+    "Date": "2004-06-02",
+    "ReferralSource": "Emergency Department",
+    "DataSource": "Patient"
+  },
+  "ChiefComplaint": {
+    "Complaint": "Chest pains",
+    "ID": "Ms. Rogers is a 56-year-old white female having chest pains for the last week."
+  },
+  "HistoryOfPresentIllness": {
+    "FirstAdmission": true,
+    "PatientAge": 56,
+    "GeneralHealth": "Usual state of good health until one week prior to admission.",
+    "InitialOnset": "Abrupt onset of chest pain in left para-sternal area, radiating up to her neck.",
+    "InitialEpisode": {
+      "Activity": "Working in the garden",
+      "DurationOfWork": "45 minutes",
+      "Symptoms": {
+        "Pain": "Dull and aching",
+        "ShortnessOfBreath": true,
+        "Sweating": false,
+        "Nausea": false,
+        "Vomiting": false
+      },
+      "PainDuration": "5 to 10 minutes",
+      "Relief": "Resolved with rest in a cool area."
+    },
+    "SubsequentEpisodes": [
+      {
+        "Occurrence": "Three days ago",
+        "Activity": "Walking her dog",
+        "Duration": "15 minutes",
+        "Relief": "Resolved with rest."
+      },
+      {
+        "Occurrence": "This evening",
+        "Trigger": "Awakened from sleep",
+        "Duration": "30 minutes",
+        "Action": "Prompted visit to Emergency Department."
+      }
+    ],
+    "AssociatedSymptoms": {
+      "Dizziness": false,
+      "Palpitations": false,
+      "ShortnessOfBreath": true
+    },
+    "PainDetails": {
+      "ExertionalDyspnea": false,
+      "Orthopnea": false,
+      "ParoxysmalNocturnalDyspnea": false,
+      "MovementRelated": false,
+      "FoodRelated": false,
+      "GERDSymptoms": false,
+      "PalpablePain": false
+    },
+    "RelevantHistory": {
+      "HeartProblems": "Never diagnosed with heart problems.",
+      "ChestPainsBefore": "None",
+      "Claudication": "None",
+      "Hypertension": {
+        "Diagnosed": "3 years ago",
+        "Medications": "Unknown"
+      },
+      "Smoking": false,
+      "Diabetes": false,
+      "HormoneReplacementTherapy": false,
+      "FamilyHistory": {
+        "PrematureCAD": true,
+        "CholesterolLevel": "Unknown"
+      }
+    }
+  },
+  "PastMedicalHistory": {
+    "SurgicalHistory": [
+      {
+        "Year": 1994,
+        "Procedure": "Total abdominal hysterectomy and bilateral oophorectomy for uterine fibroids."
+      },
+      {
+        "Year": 1998,
+        "Procedure": "Bunionectomy"
+      }
+    ],
+    "MedicalHistory": [
+      {
+        "Year": 1998,
+        "Condition": "Hypertension",
+        "Treatment": "Unknown medication, stopped after 6 months due to drowsiness."
+      },
+      {
+        "Year": 1990,
+        "Condition": "Peptic ulcer disease",
+        "Treatment": "Resolved after 3 months on cimetidine."
+      }
+    ],
+    "Allergies": {
+      "Substance": "Penicillin",
+      "Reaction": "Rash and hives in 1985."
+    }
+  },
+  "SocialHistory": {
+    "AlcoholUse": {
+      "Frequency": "1 or 2 beers each weekend; 1 glass of wine once a week with dinner."
+    },
+    "TobaccoUse": false,
+    "Medications": {
+      "PrescriptionDrugs": "None",
+      "IllegalDrugs": "None",
+      "OTCDrugs": {
+        "Type": "Ibuprofen (Advil)",
+        "Use": "Occasional for headache (every other day)."
+      }
+    }
+  },
+  "FamilyHistory": {
+    "Mother": {
+      "Age": 79,
+      "HealthStatus": "Alive and well."
+    },
+    "Father": {
+      "Age": 54,
+      "CauseOfDeath": "Heart attack."
+    },
+    "Siblings": "No brothers or sisters.",
+    "FamilyMedicalHistory": {
+      "Hypertension": true,
+      "Diabetes": false,
+      "Cancer": false
+    }
+  },
+  "ReviewOfSystems": {
+    "HEENT": {
+      "Headache": "No complaints",
+      "VisionChanges": "No complaints",
+      "NoseOrEarProblems": "No complaints",
+      "SoreThroat": "No complaints"
+    },
+    "Cardiovascular": "See History of Present Illness",
+    "Gastrointestinal": {
+      "Dysphagia": "No complaints",
+      "Nausea": "No complaints",
+      "Vomiting": "No complaints",
+      "StoolChanges": "No complaints",
+      "EpigastricPain": "Burning in quality, approximately twice a month, primarily at night."
+    },
+    "Genitourinary": {
+      "Dysuria": "No complaints",
+      "Nocturia": "No complaints",
+      "Polyuria": "No complaints",
+      "Hematuria": "No complaints",
+      "VaginalBleeding": "No complaints"
+    },
+    "Musculoskeletal": {
+      "LowerBackPain": "Aching in quality, approximately once every week after working in her garden. Relieved with Tylenol.",
+      "Arthralgias": "No complaints",
+      "MuscleAches": "No complaints"
+    },
+    "Neurological": {
+      "Weakness": "No complaints",
+      "Numbness": "No complaints",
+      "Incoordination": "No complaints"
+    }
+  },
+  "GeneralCommentsNotes": {
+    "ReasonForVisit": "Define the reason for the patient's visit as specifically as possible.",
+    "NatureOfProblem": {
+      "AcuteOrChronic": "Convey the acute or chronic nature of the problem.",
+      "Chronology": "Establish a chronology."
+    },
+    "Symptoms": {
+      "Onset": "Onset",
+      "Character": "Character",
+      "Location": "Location",
+      "Radiation": "Radiation",
+      "Circumstances": "Circumstances; exacerbating factors",
+      "AssociatedSymptoms": "Associated symptoms",
+      "Duration": "Duration",
+      "Resolution": "Resolution; alleviating factors"
+    },
+    "NaturalHistory": {
+      "SinceOnset": "Describe the natural history of her problem since its onset.",
+      "NewCircumstances": "Change or new circumstances to the problem.",
+      "NewDuration": "New duration."
+    },
+    "ReasonForVisit": "Reason she came in for visit.",
+    "PatientReliefAttempts": "What has the patient tried for relief?",
+    "RelevantROS": {
+      "PositiveAndNegative": "Relevant positive and negative ROS for this complaint.",
+      "SystemReview": "Review of systems for the relevant organ system."
+    },
+    "RiskFactors": "Relevant risk factors/environmental conditions.",
+    "Medications": {
+      "GenericNames": "Always use generic names.",
+      "ReactionType": "Always list the type of reported reaction.",
+      "Quantity": "Quantity",
+      "OTCDrugs": "Include over-the-counter drugs."
+    },
+    "DiseasePresence": "Comment specifically on the presence or absence of diseases relevant to the chief complaint.",
+    "ROSSection": "Separate each ROS section for easy identification. OK to refer to HPI if adequately covered there.",
+    "Findings": "List positive and negative findings in brief, concise phrases or sentences."
+  }
+}

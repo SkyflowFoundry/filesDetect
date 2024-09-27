@@ -1,0 +1,37 @@
+{
+  "AccountId": "l462cc76228247b38f79c439d67d20ec",
+  "Vault_URL": "https://ebfc9bee4242.vault.skyflowapis.com",
+  "Vault_ID": "ud46d36edbe244c999694cd869d8b4ea",
+  "Common_Files_Directory": "/Users/priyantadharmasena/Documents/Python/commonFiles",
+  "Data_Types": [
+    "mp3",
+    "wav",
+    "pdf",
+    "txt",
+    "json",
+    "jpg",
+    "jpeg",
+    "tif",
+    "tiff",
+    "png",
+    "bmp"
+  ],
+  "restrict_entity_types": ["all"],
+  "Max_Api_Attempts": 20,
+  "ImageFiles": ["jpg", "jpeg", "tif", "tiff", "png", "bmp"],
+  "AudioFiles": ["mp3", "wav"],
+  "_comment": "** Detect API File Options: Don't delete anything below here **",
+  "pdf": {
+    "options": {
+      "density": 0,
+      "max_resolution": 0
+    }
+  },
+  "image": {
+    "output_processed_image": true
+  },
+  "audio": {
+    "output_transcription": "aws_transcription_diarize",
+    "output_processed_audio": false
+  }
+}
