@@ -13,8 +13,13 @@ def file_selector(file_type, starting_directory):
     root = tk.Tk()
     root.withdraw()  # Hide the root window
 
+    root.attributes('-topmost', True)  # Make the file dialog stays on top!
+    root.grab_set()  # Set grab to make it modal    
+
     # Open a file dialog for selecting a file
     file_path = filedialog.askopenfilename(initialdir=starting_directory, title= windowTitle)
+
+    root.grab_release() # Dialog is closed, release the grab
 
     # Return the file name and file path as a tuple
     if file_path:
