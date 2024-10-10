@@ -14,7 +14,8 @@
     "tif",
     "tiff",
     "png",
-    "bmp"
+    "bmp",
+    "docx"
   ],
   "restrict_entity_types": ["all"],
   "Max_Api_Attempts": 20,
