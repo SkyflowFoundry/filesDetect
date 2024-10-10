@@ -1,7 +1,7 @@
 # filesDetect.py: Skyflow Files Detect API
 # Author: Priyanta Dharmasena, Devanshu Brahmbhatt
 # Modified: August 2024
-import requests
+import requests  # type: ignore
 import json
 import os
 import sys
@@ -48,7 +48,7 @@ def getFileSetEnv(params):            #setup environment and get Jwt
 
     if file_type not in DATA_TYPES:       #not picking a supported data file
         print(f"ERROR: File type {file_type} not currently supported")
-        print("Supported files are: mp3, wav, pdf, txt, json, jpg, jpeg, tif, tiff, png, bmp")
+        print("Supported files are: mp3, wav, pdf, txt, csv, json, jpg, jpeg, tif, tiff, png, bmp")
         exit(1)
     else:                           #set payload api-options for file_type
         if file_type in params['ImageFiles']:
@@ -106,8 +106,9 @@ def detect_file(file_path, payloadOption, file_type, fname, group):
         else:
             audioOut = None
 
+    # print(f"###DEBUG: url: {url} headers: {headers} data: {json.dumps(payload)}")
     response = requests.post(url, headers=headers, data=json.dumps(payload))
-    #print(response.headers)   #debug
+    # print(response.headers)   #debug
 
     if response.status_code == 200:
         return response.json(), audioOut
