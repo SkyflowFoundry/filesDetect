@@ -1,14 +1,14 @@
-# filesDetect.py: Skyflow Files Detect API
-# Author: Priyanta Dharmasena, Devanshu Brahmbhatt
-# Modified: August 2024
 import requests  # type: ignore
 import json
 import os
 import sys
 import base64
 import time
+import re
 from datetime import datetime
 from pathlib import Path
+
+BEARER_TOKEN = None
 
 # get full file path to current script
 script_path = Path(__file__).resolve()
@@ -35,8 +35,16 @@ from fileFinder import file_selector   # type: ignore
 from debugOut import debug             # type: ignore
 from get_bearer_token import getSignedJWT_fromfile, getBearerToken  #type: ignore
 
+def get_bearer_token_global(fullCredsFile):
+    # Generate BEARER_TOKEN only once and reuse it globally.
+    global BEARER_TOKEN
+    if BEARER_TOKEN is None:
+        signedJWT, creds, creds["clientID"] = getSignedJWT_fromfile(fullCredsFile)
+        BEARER_TOKEN = getBearerToken(signedJWT, creds)
+    return BEARER_TOKEN
 
-def getFileSetEnv(params):            #setup environment and get Jwt
+def getFileSetEnv(params):
+    # Setup environment and get JWT.
     output_dir = "output"
     fileName, fullFile = file_selector('input ', current_directory)
     print(f"Input File: \n {fileName}   successfully uploaded...")
@@ -64,10 +72,8 @@ def getFileSetEnv(params):            #setup environment and get Jwt
             payloadOption =  None      #detect api no options currently available
             group = None
 
-    signedJWT, creds, creds["clientID"] = getSignedJWT_fromfile(fullCredsFile)
-    BEARER_TOKEN = getBearerToken(signedJWT, creds)
+    BEARER_TOKEN = get_bearer_token_global(fullCredsFile)
     return fullFile, current_directory, BEARER_TOKEN, payloadOption, file_type, name, group
-
 
 def convert_file_to_base64(file_path):
     with open(file_path, "rb") as file:
@@ -102,13 +108,8 @@ def detect_file(file_path, payloadOption, file_type, fname, group):
         payload[group] = payloadOption
         if payloadOption.get("output_processed_audio") is not None:
             audioOut = payloadOption.get("output_processed_audio")
-            print(f"output_processed_audio is set to: {payloadOption['output_processed_audio']}")
-        else:
-            audioOut = None
 
-    # print(f"###DEBUG: url: {url} headers: {headers} data: {json.dumps(payload)}")
     response = requests.post(url, headers=headers, data=json.dumps(payload))
-    # print(response.headers)   #debug
 
     if response.status_code == 200:
         return response.json(), audioOut
@@ -142,13 +143,6 @@ def getDateTime():
     return str(now.strftime("%m%d%Y%H%M%S"))
 
 def save_status_response(status_response, output_dir, file_type, fname):
-    # Save status-response to file  #section used for debugging in base64
-    # response_file_path = os.path.join(output_dir, f"detect_{fname}-{file_type}_response_{getDateTime()}.json")
-    # with open(response_file_path, "w") as output_file:
-    #     json.dump(status_response, output_file, indent=4)
-    # print(f"Status response saved to: {response_file_path}")
-
-    # Look for processedFile with processedFileType 'entities' in payload
     entities_processed_file = None
     for output in status_response.get('output', []):
         if output.get('processedFileType') == 'entities':
@@ -160,7 +154,6 @@ def save_status_response(status_response, output_dir, file_type, fname):
 
         try:
             decoded_json = json.loads(decoded_text)
-            # Save the parsed JSON to a .txt file with formatting
             text_file_path = os.path.join(output_dir, f"entities_{fname}-{file_type}_{getDateTime()}.json")
             with open(text_file_path, "w") as text_file:
                 json.dump(decoded_json, text_file, indent=4)
@@ -170,30 +163,56 @@ def save_status_response(status_response, output_dir, file_type, fname):
     else:
         print("Error: 'entities' processedFile not found in status response.")
 
+def replace_with_redacted(file_path):
+    # Read the file, apply regex to replace tokens with '******', and save to a new file.
+    regex_pattern = r"\[[A-Z_]+\d+\]"  # The pattern to match tokens like [NAME_1], [AGE_2], etc.
+
+    # Read the original file
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    # Apply regex replacement
+    redacted_content = re.sub(regex_pattern, "******", content)
+
+    # Replace the "tokenized_" prefix with "redacted_"
+    redacted_file_path = file_path.replace("tokenized_", "redacted_")
+
+    # Write redacted content to the new file
+    with open(redacted_file_path, 'w') as redacted_file:
+        redacted_file.write(redacted_content)
+
+    print(f"Redacted file saved to: {redacted_file_path}")
+
 def check_and_save_status(status_url_full, status_id, output_dir, file_type, fname, group, audioOut, max_attempts):
-#(status_url_full, status_id, output_dir, file_type, fname, group, max_attempts)    
+    # Check status of the file processing and save results.
     attempt = 0
     while attempt < max_attempts:
         status_response = check_status(status_id)
-        #print(f"Status Response: {json.dumps(status_response, indent=4)}")
 
         outExt = None
-        if audioOut == False and group == 'audio': 
+        if audioOut is False and group == 'audio':
             outExt = 'txt'
-        elif audioOut == True and group == 'audio': 
-            outExt = 'mp3'    
+        elif audioOut is True and group == 'audio':
+            outExt = 'mp3'
         else:
             outExt = file_type
 
         if status_response.get("status") == "SUCCESS":
             processed_file_base64 = extract_base64_from_response(status_response)
             if processed_file_base64:
-                output_file_path = os.path.join(output_dir, f"redacated_{fname}-{file_type}-{getDateTime()}.{outExt}")
+                timestamp = getDateTime()
+                output_file_path = os.path.join(output_dir, f"tokenized_{fname}-{file_type}-{timestamp}.{outExt}")
                 save_base64_to_file(processed_file_base64, output_file_path)
                 print(f"\nSUCCESS: Processed {file_type} saved to: \n{output_file_path}")
+
+                # Save the status response for debugging purposes
                 save_status_response(status_response, output_dir, file_type, fname)
+
+                # **Only perform redaction if the file is a 'txt' file**
+                if file_type in ['txt', 'csv', 'json', 'mp3']:
+                    replace_with_redacted(output_file_path)
             else:
-                print("Redacted file not found in the response.")
+                print("Processed file not found in the response.")
             break
         elif status_response.get("status") == "FAILED":
             print(f"Error in processing: {status_response.get('message')}")
@@ -210,15 +229,17 @@ def run_files_detect(input_file_path, output_dir, payloadOption, file_type, fnam
 
     # Detect file and get status URL
     detect_response, audioOut = detect_file(input_file_path, payloadOption, file_type, fname, group)
-    if 'status_url' in detect_response:
-        status_url_full = detect_response['status_url']
-        status_id = status_url_full.split('/')[-1]  # Extract the unique identifier
-        #print(f"###status-url & status_id: {status_url_full}, {status_id}") #debug
 
-        # Check status and get processed file
-        check_and_save_status(status_url_full, status_id, output_dir, file_type, fname, group, audioOut, max_attempts)
+    # Check if response is a string or JSON (dict)
+    if isinstance(detect_response, dict):
+        if 'status_url' in detect_response:
+            status_url_full = detect_response['status_url']
+            status_id = status_url_full.split('/')[-1]  # Extract the unique identifier
+            check_and_save_status(status_url_full, status_id, output_dir, file_type, fname, group, audioOut, max_attempts)
+        else:
+            print(f"Error in initial request: {detect_response.get('message')}")
     else:
-        print(f"Error in initial request: {detect_response.get('message')}")
+        print(f"Error in initial request: {detect_response}")
 
 if __name__ == "__main__":
     input_file_path, current_directory, BEARER_TOKEN, payloadOption, file_type, fname, group = getFileSetEnv(params)

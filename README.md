@@ -7,13 +7,14 @@ This intends to show the power of the Skyflow API first approach, using the Skyf
 Before running the tool, you need to perform pre-setup tasks
 You need to have a Skyflow Try environment account (login)
 
-Login to your Skyflow Studio (assuminng you are a vault owener or administrator)
+Login to your Skyflow Studio as an account administrator
 
 Create a Skyflow Account level "**Service Account**"
 The service account MUST have the following Assignments & Roles:
 
 - Assignment: Account-Level Role: "Account Admin"
 - Assignment: Workspace-level Role: "Vault Creator" and "Workspace Admin"
+- Assignment: Vault-level Role: "Vault Owner"
 - "SAVE" the settings and generate a **credentials.json** file. (You will be requested to provide this file when the script runs!)
 - Note: You need to use this generated credentials.json file and not the one supplied in this repo which is just a container.
 
