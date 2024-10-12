@@ -5,6 +5,7 @@ import sys
 import base64
 import time
 import re
+import docx
 from datetime import datetime
 from pathlib import Path
 
@@ -26,6 +27,7 @@ VAULT_ID            = params['Vault_ID']
 VAULT_URL           = params['Vault_URL']
 DATA_TYPES          = params['Data_Types']      #detect supported file types
 MAX_ATTEMPTS        = params['Max_Api_Attempts']
+FULL_REDACTION = params['fullRedaction'].lower() == 'true'
 common_directory    = params['Common_Files_Directory']
 # Add common utils directory to path
 if common_directory not in sys.path:
@@ -142,6 +144,59 @@ def getDateTime():
     now = datetime.now()
     return str(now.strftime("%m%d%Y%H%M%S"))
 
+def replace_text_in_docx(doc, output_path):
+    # Define a regex pattern to match text within square brackets
+    pattern = re.compile(r'\[.*?\]')
+
+    # Iterate through paragraphs and replace the text
+    for para in doc.paragraphs:
+        if pattern.search(para.text):
+            replaced_text = pattern.sub(lambda match: '*' * len(match.group()), para.text)
+            para.text = replaced_text
+
+    # Iterate through tables (if the .docx file has tables)
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                if pattern.search(cell.text):
+                    replaced_text = pattern.sub(lambda match: '*' * len(match.group()), cell.text)
+                    cell.text = replaced_text
+
+    # Save the modified document to the output path
+    doc.save(output_path)
+    print(f"\nRedacted DOCX file saved to: \n{output_path}")
+
+def replace_text_in_txt(file_path, output_path):
+    # Read the text from the file
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    # Define a regex pattern to match text within square brackets
+    pattern = re.compile(r'\[.*?\]')
+
+    # Replace matched patterns with equivalent length '*' characters
+    replaced_content = pattern.sub(lambda match: '*' * len(match.group()), content)
+
+    # Write modified content back to new file
+    with open(output_path, 'w') as file:
+        file.write(replaced_content)
+    print(f"\nSUCCESS: Redacted {file_type} saved to: \n{output_path}")
+
+def redact_file(file_path, output_path, file_type):
+    # Check it's a docx or txt file
+    if file_type.lower() == 'docx':
+        # Process the .docx file
+        doc = docx.Document(file_path)
+        replace_text_in_docx(doc, output_path)
+
+    elif file_type.lower() == 'txt':
+        # Process the .txt file
+        replace_text_in_txt(file_path, output_path)
+
+    else:
+        print("Unsupported file format. Please provide a .docx or .txt file.")
+
+
 def save_status_response(status_response, output_dir, file_type, fname):
     entities_processed_file = None
     for output in status_response.get('output', []):
@@ -163,25 +218,6 @@ def save_status_response(status_response, output_dir, file_type, fname):
     else:
         print("Error: 'entities' processedFile not found in status response.")
 
-def replace_with_redacted(file_path):
-    # Read the file, apply regex to replace tokens with '******', and save to a new file.
-    regex_pattern = r"\[[A-Z_]+\d+\]"  # The pattern to match tokens like [NAME_1], [AGE_2], etc.
-
-    # Read the original file
-    with open(file_path, 'r') as file:
-        content = file.read()
-
-    # Apply regex replacement
-    redacted_content = re.sub(regex_pattern, "******", content)
-
-    # Replace the "tokenized_" prefix with "redacted_"
-    redacted_file_path = file_path.replace("tokenized_", "redacted_")
-
-    # Write redacted content to the new file
-    with open(redacted_file_path, 'w') as redacted_file:
-        redacted_file.write(redacted_content)
-
-    print(f"Redacted file saved to: {redacted_file_path}")
 
 def check_and_save_status(status_url_full, status_id, output_dir, file_type, fname, group, audioOut, max_attempts):
     # Check status of the file processing and save results.
@@ -208,9 +244,13 @@ def check_and_save_status(status_url_full, status_id, output_dir, file_type, fna
                 # Save the status response for debugging purposes
                 save_status_response(status_response, output_dir, file_type, fname)
 
-                # **Only perform redaction if the file is a 'txt' file**
-                if file_type in ['txt', 'csv', 'json', 'mp3']:
-                    replace_with_redacted(output_file_path)
+                # **Perform redaction if setting directive is set**
+                # print(f"FULL_REDACTION: {FULL_REDACTION} (type: {type(FULL_REDACTION)})")
+
+                if FULL_REDACTION == True:
+                    redacted_output_path = os.path.join(output_dir, f"redacted_{fname}-{file_type}-{getDateTime()}.{file_type}")
+                    redact_file(output_file_path, redacted_output_path, file_type)
+
             else:
                 print("Processed file not found in the response.")
             break
