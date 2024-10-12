@@ -3,6 +3,7 @@
   "Vault_URL": "your-skyflow-vault-url",
   "Vault_ID": "your-skyflow-vault-id",
   "Common_Files_Directory": "path-to-the-common_files-diretcory-extracted-from-the-repo",
+  "fullRedaction": "true",
   "Data_Types": [
     "mp3",
     "wav",
