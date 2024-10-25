@@ -1,3 +1,6 @@
+# filesDetect2.0.py: Skyflow Files Detect API
+# Author: Priyanta Dharmasena
+# Modified: October 2024
 import requests  # type: ignore
 import json
 import os
@@ -107,27 +110,12 @@ def detect_file(file_path, payloadOption, file_type, fname, group):
         },
         "vault_id": VAULT_ID
     }
-
-    #Uncomment if needed; removed for simplification
-    # if payloadOption is not None:
-    #     payload[group] = payloadOption
-    #     if payloadOption.get("output_processed_audio") is not None:
-    #         audioOut = payloadOption.get("output_processed_audio")
-
-    # print(f"DEBUG###: url: {url}\n")
-    # print(f"DEBUG###: headers: {headers}")
-    # print(f"DEBUG###: payload: {json.dumps(payload)}\n")
     
     response = requests.post(url, headers=headers, data=json.dumps(payload))
-    # print("DEBUG - ### RESPONSE-HEADERS:")
-    # print(response.headers)
 
     if response.status_code == 200:
-        #print("Success [200] from detect_file")
         return response.json(), audioOut
     else:
-        #print("It is failing in detect_file().....")
-        #print(response)
         print(f"Error {response.status_code}: {response.text}")
         return {"error": response.status_code, "message": response.text}
 
@@ -235,7 +223,6 @@ def check_and_save_runs(runs_url_full, runs_id, output_dir, file_type, fname, gr
     attempt = 0
     while attempt < max_attempts:
         runs_response = check_runs(runs_id)
-        #print("DEBUG - Full runs_response:", json.dumps(runs_response, indent=4)) #Debug
 
         outExt = None
         if audioOut is False and group == 'audio':
@@ -280,8 +267,6 @@ def run_files_detect(input_file_path, output_dir, payloadOption, file_type, fnam
     # Detect file and get runs URL
     detect_response, audioOut = detect_file(input_file_path, payloadOption, file_type, fname, group)
 
-    #print(f"detect_file() returned detect_response: {detect_response}")
-
     # Check if response is a string or JSON (dict)
     if isinstance(detect_response, dict):
         if 'run_id' in detect_response:  # Updated to look for 'run_id'
@@ -292,8 +277,6 @@ def run_files_detect(input_file_path, output_dir, payloadOption, file_type, fnam
             # Replace this with the function that processes the run using runs_id
             check_and_save_runs(runs_url_full, runs_id, output_dir, file_type, fname, group, audioOut, max_attempts)
             
-            #print(f"###-DEBUG: runs_url: {runs_url_full}\n")
-            #print(f"###-DEBUG: detect_response: {detect_response}\n")
         else:
             print(f"Error in initial request: {detect_response.get('message')}")
     else:
