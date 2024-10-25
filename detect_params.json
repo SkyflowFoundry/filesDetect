@@ -1,0 +1,49 @@
+{
+  "AccountId": "your-skyflow-account-id",
+  "Vault_URL": "your-skyflow-vault-url",
+  "Vault_ID": "your-skyflow-vault-id",
+  "Common_Files_Directory": "/<your-directory>location-for-<commonFiles>",
+  "fullRedaction": "true",
+  "redaction_set": ["docx", "csv", "json", "xml", "txt"],
+  "Data_Types": [
+    "pdf",
+    "doc",
+    "docx",
+    "bmp",
+    "jpeg",
+    "jpg",
+    "png",
+    "tif",
+    "tiff",
+    "txt",
+    "json",
+    "xml",
+    "csv",
+    "xls",
+    "xlsx",
+    "pptx",
+    "ppt",
+    "mp3",
+    "wav"
+  ],
+  "restrict_entity_types": ["all"],
+  "_comment1": "** 'deidentify_token_format' values: ENTITY_ONLY or ENTITY_UNQ_COUNTER **",
+  "deidentify_token_format": "ENTITY_UNQ_COUNTER",
+  "Max_Api_Attempts": 20,
+  "ImageFiles": ["jpg", "jpeg", "tif", "tiff", "png", "bmp"],
+  "AudioFiles": ["mp3", "wav"],
+  "_comment2": "** Detect API File Options: Don't delete anything below here **",
+  "pdf": {
+    "options": {
+      "density": 0,
+      "max_resolution": 0
+    }
+  },
+  "image": {
+    "output_processed_image": true
+  },
+  "audio": {
+    "output_transcription": "aws_transcription_diarize",
+    "output_processed_audio": false
+  }
+}
