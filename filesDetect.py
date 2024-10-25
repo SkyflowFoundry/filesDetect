@@ -50,7 +50,7 @@ def getFileSetEnv(params):
     output_dir = "output"
     fileName, fullFile = file_selector('input ', current_directory)
     print(f"Input File: \n {fileName}   successfully uploaded...")
-    credsFile, fullCredsFile = file_selector('Salesforce Credentials', current_directory)
+    credsFile, fullCredsFile = file_selector('Skyflow Credentials', current_directory)
     print(f"Credentials file: \n {credsFile} successfully uploaded...")
     #get type from the file name
     name, extension = os.path.splitext(fileName)
