@@ -189,7 +189,7 @@ def redact_file(file_path, output_path, file_type):
         doc = docx.Document(file_path)
         replace_text_in_docx(doc, output_path)
 
-    elif file_type.lower() in ['txt', 'json', 'csv']:
+    elif file_type.lower() in ['txt', 'json', 'csv', 'xml']:
         # Process the .txt, .json, or .csv file
         replace_text_in_txt(file_path, output_path)
 
