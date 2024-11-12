@@ -272,7 +272,8 @@ def run_files_detect(input_file_path, output_dir, payloadOption, file_type, fnam
         if 'run_id' in detect_response:  # Updated to look for 'run_id'
             run_id = detect_response['run_id']
             runs_url_full = VAULT_URL + run_id  # Construct the full URL using VAULT_URL
-            runs_id = runs_url_full.split('/')[-1]  # Extract the unique identifier
+            #runs_id = runs_url_full.split('/')[-1]  # Extract the unique identifier
+            runs_id = run_id    #Per detect GA
             
             # Replace this with the function that processes the run using runs_id
             check_and_save_runs(runs_url_full, runs_id, output_dir, file_type, fname, group, audioOut, max_attempts)
