@@ -14,6 +14,9 @@ def file_selector(file_type, starting_directory):
     root.withdraw()  # Hide the root window
 
     root.attributes('-topmost', True)  # Make the file dialog stays on top!
+    root.after(0, root.lift)  # Lift the root window
+    root.after(0, lambda: root.focus_force())  # Force focus
+
     root.grab_set()  # Set grab to make it modal    
 
     # Open a file dialog for selecting a file

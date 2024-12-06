@@ -1,0 +1,204 @@
+<MedicalRecord>
+    <PatientInformation>
+        <Name>Rogers, Pamela</Name>
+        <Date>2004-06-02</Date>
+        <ReferralSource>Emergency Department</ReferralSource>
+        <DataSource>Patient</DataSource>
+    </PatientInformation>
+    <ChiefComplaint>
+        <Complaint>Chest pains</Complaint>
+        <ID>Ms. Rogers is a 56-year-old white female having chest pains for the last week.</ID>
+    </ChiefComplaint>
+    <HistoryOfPresentIllness>
+        <FirstAdmission>true</FirstAdmission>
+        <PatientAge>56</PatientAge>
+        <GeneralHealth>Usual state of good health until one week prior to admission.</GeneralHealth>
+        <InitialOnset>Abrupt onset of chest pain in left para-sternal area, radiating up to her neck.</InitialOnset>
+        <InitialEpisode>
+            <Activity>Working in the garden</Activity>
+            <DurationOfWork>45 minutes</DurationOfWork>
+            <Symptoms>
+                <Pain>Dull and aching</Pain>
+                <ShortnessOfBreath>true</ShortnessOfBreath>
+                <Sweating>false</Sweating>
+                <Nausea>false</Nausea>
+                <Vomiting>false</Vomiting>
+            </Symptoms>
+            <PainDuration>5 to 10 minutes</PainDuration>
+            <Relief>Resolved with rest in a cool area.</Relief>
+        </InitialEpisode>
+        <SubsequentEpisodes>
+            <Episode>
+                <Occurrence>Three days ago</Occurrence>
+                <Activity>Walking her dog</Activity>
+                <Duration>15 minutes</Duration>
+                <Relief>Resolved with rest.</Relief>
+            </Episode>
+            <Episode>
+                <Occurrence>This evening</Occurrence>
+                <Trigger>Awakened from sleep</Trigger>
+                <Duration>30 minutes</Duration>
+                <Action>Prompted visit to Emergency Department.</Action>
+            </Episode>
+        </SubsequentEpisodes>
+        <AssociatedSymptoms>
+            <Dizziness>false</Dizziness>
+            <Palpitations>false</Palpitations>
+            <ShortnessOfBreath>true</ShortnessOfBreath>
+        </AssociatedSymptoms>
+        <PainDetails>
+            <ExertionalDyspnea>false</ExertionalDyspnea>
+            <Orthopnea>false</Orthopnea>
+            <ParoxysmalNocturnalDyspnea>false</ParoxysmalNocturnalDyspnea>
+            <MovementRelated>false</MovementRelated>
+            <FoodRelated>false</FoodRelated>
+            <GERDSymptoms>false</GERDSymptoms>
+            <PalpablePain>false</PalpablePain>
+        </PainDetails>
+        <RelevantHistory>
+            <HeartProblems>Never diagnosed with heart problems.</HeartProblems>
+            <ChestPainsBefore>None</ChestPainsBefore>
+            <Claudication>None</Claudication>
+            <Hypertension>
+                <Diagnosed>3 years ago</Diagnosed>
+                <Medications>Unknown</Medications>
+            </Hypertension>
+            <Smoking>false</Smoking>
+            <Diabetes>false</Diabetes>
+            <HormoneReplacementTherapy>false</HormoneReplacementTherapy>
+            <FamilyHistory>
+                <PrematureCAD>true</PrematureCAD>
+                <CholesterolLevel>Unknown</CholesterolLevel>
+            </FamilyHistory>
+        </RelevantHistory>
+    </HistoryOfPresentIllness>
+    <PastMedicalHistory>
+        <SurgicalHistory>
+            <Surgery>
+                <Year>1994</Year>
+                <Procedure>Total abdominal hysterectomy and bilateral oophorectomy for uterine fibroids.</Procedure>
+            </Surgery>
+            <Surgery>
+                <Year>1998</Year>
+                <Procedure>Bunionectomy</Procedure>
+            </Surgery>
+        </SurgicalHistory>
+        <MedicalHistory>
+            <Condition>
+                <Year>1998</Year>
+                <ConditionName>Hypertension</ConditionName>
+                <Treatment>Unknown medication, stopped after 6 months due to drowsiness.</Treatment>
+            </Condition>
+            <Condition>
+                <Year>1990</Year>
+                <ConditionName>Peptic ulcer disease</ConditionName>
+                <Treatment>Resolved after 3 months on cimetidine.</Treatment>
+            </Condition>
+        </MedicalHistory>
+        <Allergies>
+            <Substance>Penicillin</Substance>
+            <Reaction>Rash and hives in 1985.</Reaction>
+        </Allergies>
+    </PastMedicalHistory>
+    <SocialHistory>
+        <AlcoholUse>
+            <Frequency>1 or 2 beers each weekend; 1 glass of wine once a week with dinner.</Frequency>
+        </AlcoholUse>
+        <TobaccoUse>false</TobaccoUse>
+        <Medications>
+            <PrescriptionDrugs>None</PrescriptionDrugs>
+            <IllegalDrugs>None</IllegalDrugs>
+            <OTCDrugs>
+                <Type>Ibuprofen (Advil)</Type>
+                <Use>Occasional for headache (every other day).</Use>
+            </OTCDrugs>
+        </Medications>
+    </SocialHistory>
+    <FamilyHistory>
+        <Mother>
+            <Age>79</Age>
+            <HealthStatus>Alive and well.</HealthStatus>
+        </Mother>
+        <Father>
+            <Age>54</Age>
+            <CauseOfDeath>Heart attack.</CauseOfDeath>
+        </Father>
+        <Siblings>No brothers or sisters.</Siblings>
+        <FamilyMedicalHistory>
+            <Hypertension>true</Hypertension>
+            <Diabetes>false</Diabetes>
+            <Cancer>false</Cancer>
+        </FamilyMedicalHistory>
+    </FamilyHistory>
+    <ReviewOfSystems>
+        <HEENT>
+            <Headache>No complaints</Headache>
+            <VisionChanges>No complaints</VisionChanges>
+            <NoseOrEarProblems>No complaints</NoseOrEarProblems>
+            <SoreThroat>No complaints</SoreThroat>
+        </HEENT>
+        <Cardiovascular>See History of Present Illness</Cardiovascular>
+        <Gastrointestinal>
+            <Dysphagia>No complaints</Dysphagia>
+            <Nausea>No complaints</Nausea>
+            <Vomiting>No complaints</Vomiting>
+            <StoolChanges>No complaints</StoolChanges>
+            <EpigastricPain>Burning in quality, approximately twice a month, primarily at night.</EpigastricPain>
+        </Gastrointestinal>
+        <Genitourinary>
+            <Dysuria>No complaints</Dysuria>
+            <Nocturia>No complaints</Nocturia>
+            <Polyuria>No complaints</Polyuria>
+            <Hematuria>No complaints</Hematuria>
+            <VaginalBleeding>No complaints</VaginalBleeding>
+        </Genitourinary>
+        <Musculoskeletal>
+            <LowerBackPain>Aching in quality, approximately once every week after working in her garden. Relieved with Tylenol.</LowerBackPain>
+            <Arthralgias>No complaints</Arthralgias>
+            <MuscleAches>No complaints</MuscleAches>
+        </Musculoskeletal>
+        <Neurological>
+            <Weakness>No complaints</Weakness>
+            <Numbness>No complaints</Numbness>
+            <Incoordination>No complaints</Incoordination>
+        </Neurological>
+    </ReviewOfSystems>
+    <GeneralCommentsNotes>
+        <ReasonForVisit>Define the reason for the patient's visit as specifically as possible.</ReasonForVisit>
+        <NatureOfProblem>
+            <AcuteOrChronic>Convey the acute or chronic nature of the problem.</AcuteOrChronic>
+            <Chronology>Establish a chronology.</Chronology>
+        </NatureOfProblem>
+        <Symptoms>
+            <Onset>Onset</Onset>
+            <Character>Character</Character>
+            <Location>Location</Location>
+            <Radiation>Radiation</Radiation>
+            <Circumstances>Circumstances; exacerbating factors</Circumstances>
+            <AssociatedSymptoms>Associated symptoms</AssociatedSymptoms>
+            <Duration>Duration</Duration>
+            <Resolution>Resolution; alleviating factors</Resolution>
+        </Symptoms>
+        <NaturalHistory>
+            <SinceOnset>Describe the natural history of her problem since its onset.</SinceOnset>
+            <NewCircumstances>Change or new circumstances to the problem.</NewCircumstances>
+            <NewDuration>New duration.</NewDuration>
+        </NaturalHistory>
+        <ReasonForVisit>Reason she came in for visit.</ReasonForVisit>
+        <PatientReliefAttempts>What has the patient tried for relief?</PatientReliefAttempts>
+        <RelevantROS>
+            <PositiveAndNegative>Relevant positive and negative ROS for this complaint.</PositiveAndNegative>
+            <SystemReview>Review of systems for the relevant organ system.</SystemReview>
+        </RelevantROS>
+        <RiskFactors>Relevant risk factors/environmental conditions.</RiskFactors>
+        <Medications>
+            <GenericNames>Always use generic names.</GenericNames>
+            <ReactionType>Always list the type of reported reaction.</ReactionType>
+            <Quantity>Quantity</Quantity>
+            <OTCDrugs>Include over-the-counter drugs.</OTCDrugs>
+        </Medications>
+        <DiseasePresence>Comment specifically on the presence or absence of diseases relevant to the chief complaint.</DiseasePresence>
+        <ROSSection>Separate each ROS section for easy identification. OK to refer to HPI if adequately covered there.</ROSSection>
+        <Findings>List positive and negative findings in brief, concise phrases or sentences.</Findings>
+    </GeneralCommentsNotes>
+</MedicalRecord>
