@@ -21,7 +21,7 @@ python3 --version
 ### Required Python Libraries
 Install the required libraries using `pip` or `pip3`:
 ```sh
-pip install requests pandas PyJWT
+pip install requests PyJWT python-docx
 ```
 
 ## Supported File Types
