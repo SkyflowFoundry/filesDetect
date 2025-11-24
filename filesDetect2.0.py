@@ -1,6 +1,6 @@
 # filesDetect2.0.py: Skyflow Files Detect API
 # Author: Priyanta Dharmasena
-# Modified: October 2024
+# Modified: October 2024, November 2025
 import requests  # type: ignore
 import json
 import os
@@ -95,10 +95,11 @@ def detect_file(file_path, payloadOption, file_type, fname, group):
     base64_file = convert_file_to_base64(file_path)
     
     url = VAULT_URL + '/' + 'v1/detect/deidentify/file'
+    print(f"url: -->   {url}")
+    print(f"Bearer {BEARER_TOKEN}")
     
     headers = {
         'Content-Type': 'application/json',
-        'x-skyflow-account-id': SKYFLOW_ACCOUNT_ID,
         'Authorization': f'Bearer {BEARER_TOKEN}',
     }
 
@@ -107,6 +108,10 @@ def detect_file(file_path, payloadOption, file_type, fname, group):
         "file": {
             "base64": base64_file,
             "data_format": file_type
+        },
+        "entity_types": ["all"],
+        "token_type": {
+            "entity_only": ["all"]
         },
         "vault_id": VAULT_ID
     }
@@ -189,7 +194,7 @@ def redact_file(file_path, output_path, file_type):
         doc = docx.Document(file_path)
         replace_text_in_docx(doc, output_path)
 
-    elif file_type.lower() in ['txt', 'json', 'csv']:
+    elif file_type.lower() in ['txt', 'json', 'csv', 'xml']:
         # Process the .txt, .json, or .csv file
         replace_text_in_txt(file_path, output_path)
 
@@ -272,7 +277,8 @@ def run_files_detect(input_file_path, output_dir, payloadOption, file_type, fnam
         if 'run_id' in detect_response:  # Updated to look for 'run_id'
             run_id = detect_response['run_id']
             runs_url_full = VAULT_URL + run_id  # Construct the full URL using VAULT_URL
-            runs_id = runs_url_full.split('/')[-1]  # Extract the unique identifier
+            #runs_id = runs_url_full.split('/')[-1]  # Extract the unique identifier
+            runs_id = run_id    #Per detect GA
             
             # Replace this with the function that processes the run using runs_id
             check_and_save_runs(runs_url_full, runs_id, output_dir, file_type, fname, group, audioOut, max_attempts)
